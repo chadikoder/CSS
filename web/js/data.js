@@ -682,6 +682,125 @@ const GIO = [
     ]}],
     quiz:[{q:"Diff : et :: :",opts:["Aucune",":  = pseudo-classe, :: = pseudo-element","Inverse","Strictement equivalent"],correct:"b",
       expl:": etat. :: fragment cree."}]
+  },
+  {id:"w3-lists",code:"B7",level:"basic",title:"CSS Lists",sub:"list-style, markers, padding",tags:["lists","basics"],
+    sections:[{h:"Styler les listes",blocks:[
+      {code:"ul {\n  list-style-type: disc;        /* disc | circle | square | none */\n  list-style-position: outside;  /* inside | outside */\n  list-style-image: url('star.svg');\n  /* Shorthand */\n  list-style: square inside;\n}\n\nol {\n  list-style-type: decimal;       /* lower-alpha | upper-roman | lower-greek... */\n}\n\n/* Custom marker (CSS3) */\nli::marker {\n  color: red;\n  font-weight: bold;\n}\n\n/* Enlever les puces */\n.no-bullets {\n  list-style: none;\n  padding-left: 0;\n}"}
+    ]}],
+    quiz:[{q:"Pour enlever les puces :",opts:["<code>display: none</code>","<code>list-style: none</code>","<code>bullet: off</code>","<code>marker: none</code>"],correct:"b",
+      expl:"<code>list-style: none</code> + souvent <code>padding-left: 0</code>."}]
+  },
+  {id:"w3-tables",code:"B8",level:"basic",title:"CSS Tables",sub:"border-collapse, padding, striping",tags:["tables","basics"],
+    sections:[{h:"Styler les tableaux",blocks:[
+      {code:"table {\n  width: 100%;\n  border-collapse: collapse;     /* fusionne les bordures */\n  /* OU : separate avec border-spacing */\n}\n\nth, td {\n  padding: 12px;\n  text-align: left;\n  border-bottom: 1px solid #e5e7eb;\n}\n\nth {\n  background: #f3f4f6;\n  font-weight: 700;\n}\n\n/* Lignes alternees */\ntbody tr:nth-child(even) {\n  background: #f9fafb;\n}\n\n/* Hover ligne */\ntbody tr:hover {\n  background: #fef3c7;\n}\n\n/* Responsive : scroll horizontal */\n.table-wrap {\n  overflow-x: auto;\n}"}
+    ]}],
+    quiz:[{q:"Pour fusionner les bordures :",opts:["<code>border-merge</code>","<code>border-collapse: collapse</code>","<code>border: shared</code>","Automatique"],correct:"b",
+      expl:"<code>border-collapse: collapse</code>."}]
+  },
+  {id:"w3-links",code:"B9",level:"basic",title:"CSS Links",sub:":link, :visited, :hover, :active",tags:["links","basics"],
+    sections:[{h:"4 etats d'un lien (LVHA)",blocks:[
+      {code:"/* Ordre IMPORTANT : LoVe HAte */\na:link    { color: blue; }       /* non visite */\na:visited { color: purple; }      /* visite */\na:hover   { color: red; }         /* survol */\na:active  { color: orange; }      /* clic en cours */\n\n/* Underline custom */\na {\n  text-decoration: none;\n  border-bottom: 1px solid currentColor;\n  transition: opacity .15s;\n}\na:hover { opacity: 0.7; }"},
+      {tip:"Memo : <strong>LoVe HAte</strong> = Link, Visited, Hover, Active."}
+    ]}],
+    quiz:[{q:"Ordre correct des pseudo-classes liens :",opts:["a, hover, link, visit","link, visited, hover, active","hover, active, link, visit","Aleatoire"],correct:"b",
+      expl:"LVHA : Link, Visited, Hover, Active. La specificite suit cet ordre."}]
+  },
+  {id:"w3-forms",code:"B10",level:"basic",title:"CSS Forms",sub:"input, button, focus, invalid",tags:["forms","basics"],
+    sections:[{h:"Styler les forms",blocks:[
+      {code:"input, textarea, select {\n  width: 100%;\n  padding: 10px 14px;\n  font: inherit;\n  border: 1px solid #cbd5e1;\n  border-radius: 8px;\n  background: white;\n  transition: border-color .15s;\n}\n\ninput:focus, textarea:focus, select:focus {\n  outline: none;\n  border-color: #6366f1;\n  box-shadow: 0 0 0 3px rgba(99,102,241,.2);\n}\n\n/* Etats de validation */\ninput:invalid:not(:placeholder-shown) {\n  border-color: #ef4444;\n}\n\ninput:valid {\n  border-color: #22c55e;\n}\n\n/* Placeholder */\ninput::placeholder {\n  color: #94a3b8;\n}\n\n/* Bouton */\nbutton {\n  padding: 10px 20px;\n  background: #6366f1;\n  color: white;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #818cf8; }\nbutton:disabled { opacity: 0.5; cursor: not-allowed; }"}
+    ]}],
+    quiz:[{q:"<code>:placeholder-shown</code> matche :",opts:["Quand placeholder visible (input vide)","Quand input rempli","Le placeholder lui-meme","Jamais"],correct:"a",
+      expl:"<code>:placeholder-shown</code> = input vide donc placeholder visible."}]
+  },
+  {id:"w3-counters",code:"I6",level:"intermediate",title:"CSS Counters",sub:"counter-reset, counter-increment",tags:["counters","intermediate"],
+    sections:[{h:"Compteurs CSS",blocks:[
+      {code:"body {\n  counter-reset: section;\n}\n\nh2 {\n  counter-increment: section;\n}\n\nh2::before {\n  content: \"Section \" counter(section) \" — \";\n  color: #6366f1;\n}\n\n/* Imbriques */\nol {\n  counter-reset: item;\n  list-style: none;\n}\nli::before {\n  counter-increment: item;\n  content: counters(item, \".\") \" \";\n}"}
+    ]}],
+    quiz:[{q:"<code>counter-reset</code> :",opts:["Demarre un compteur","Reset le DOM","Annule un counter","Met a 1"],correct:"a",
+      expl:"Initialise (ou reset si existait) un compteur a 0."}]
+  },
+  {id:"w3-tooltips",code:"I7",level:"intermediate",title:"CSS Tooltips",sub:"Tooltip pure CSS",tags:["tooltips","intermediate"],
+    sections:[{h:"Tooltip simple",blocks:[
+      {code:".tip {\n  position: relative;\n  cursor: help;\n}\n\n.tip::after {\n  content: attr(data-tip);\n  position: absolute;\n  bottom: 100%;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: 6px 12px;\n  background: #1f2937;\n  color: white;\n  border-radius: 6px;\n  font-size: 12px;\n  white-space: nowrap;\n  opacity: 0;\n  pointer-events: none;\n  transition: opacity .15s;\n}\n\n.tip:hover::after {\n  opacity: 1;\n}\n\n/* Usage : <span class=\"tip\" data-tip=\"Info\">?</span> */"}
+    ]}],
+    quiz:[{q:"<code>attr(data-tip)</code> :",opts:["JS","Lit l'attribut HTML","Erreur","Inutile"],correct:"b",
+      expl:"<code>content: attr(data-tip)</code> lit l'attribut HTML."}]
+  },
+  {id:"w3-buttons",code:"I8",level:"intermediate",title:"CSS Buttons",sub:"variants, sizes, states",tags:["buttons","intermediate"],
+    sections:[{h:"Systeme de boutons",blocks:[
+      {code:".btn {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  padding: 10px 18px;\n  font: 500 14px/1 inherit;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  transition: all .15s;\n}\n\n/* Variants */\n.btn-primary {\n  background: #6366f1;\n  color: white;\n}\n.btn-primary:hover { background: #818cf8; }\n\n.btn-ghost {\n  background: transparent;\n  color: #6366f1;\n  border: 1px solid currentColor;\n}\n\n.btn-danger {\n  background: #ef4444;\n  color: white;\n}\n\n/* Tailles */\n.btn-sm { padding: 6px 12px; font-size: 12px; }\n.btn-lg { padding: 14px 24px; font-size: 16px; }\n\n/* Etats */\n.btn:disabled { opacity: 0.5; cursor: not-allowed; }\n.btn:focus-visible { box-shadow: 0 0 0 3px rgba(99,102,241,.3); }"}
+    ]}],
+    quiz:[{q:"Pour bouton flex avec icone + texte :",opts:["<code>display: flex</code>","<code>display: inline-flex</code>","<code>display: block</code>","<code>display: grid</code>"],correct:"b",
+      expl:"<code>inline-flex</code> = flex mais sur la meme ligne que le texte."}]
+  },
+  {id:"w3-navbar",code:"I9",level:"intermediate",title:"CSS Navigation Bar",sub:"Nav horizontale / verticale / sticky",tags:["navbar","intermediate"],
+    sections:[{h:"Nav classique",blocks:[
+      {code:"nav ul {\n  display: flex;\n  gap: 8px;\n  list-style: none;\n  padding: 0;\n  margin: 0;\n}\n\nnav a {\n  display: block;\n  padding: 10px 16px;\n  color: #4b5563;\n  text-decoration: none;\n  border-radius: 6px;\n  transition: background .15s;\n}\n\nnav a:hover {\n  background: #f3f4f6;\n}\n\nnav a.active {\n  background: #6366f1;\n  color: white;\n}\n\n/* Sticky en haut */\nheader {\n  position: sticky;\n  top: 0;\n  background: white;\n  box-shadow: 0 1px 3px rgba(0,0,0,0.1);\n  z-index: 50;\n}"}
+    ]}],
+    quiz:[{q:"Pour nav qui colle en haut au scroll :",opts:["<code>fixed</code>","<code>sticky</code>","<code>absolute</code>","<code>relative</code>"],correct:"b",
+      expl:"<code>position: sticky; top: 0</code>."}]
+  },
+  {id:"w3-dropdowns",code:"I10",level:"intermediate",title:"CSS Dropdowns",sub:"Menu deroulant pur CSS",tags:["dropdown","intermediate"],
+    sections:[{h:"Dropdown sur hover",blocks:[
+      {code:".dropdown {\n  position: relative;\n  display: inline-block;\n}\n\n.dropdown-menu {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  min-width: 180px;\n  background: white;\n  border: 1px solid #e5e7eb;\n  border-radius: 8px;\n  box-shadow: 0 4px 12px rgba(0,0,0,0.1);\n  opacity: 0;\n  visibility: hidden;\n  transform: translateY(-4px);\n  transition: all .15s;\n}\n\n.dropdown:hover .dropdown-menu,\n.dropdown:focus-within .dropdown-menu {\n  opacity: 1;\n  visibility: visible;\n  transform: translateY(0);\n}"},
+      {tip:"<code>:focus-within</code> rend le dropdown accessible au clavier."}
+    ]}],
+    quiz:[{q:"Pour dropdown accessible clavier :",opts:["<code>:hover</code>","<code>:focus-within</code>","<code>:active</code>","JS obligatoire"],correct:"b",
+      expl:"<code>:focus-within</code> = matche si un descendant a le focus."}]
+  },
+  {id:"w3-filters",code:"A6",level:"advanced",title:"CSS Filters & Effects",sub:"filter, backdrop-filter, blend-mode",tags:["filters","effects","advanced"],
+    sections:[{h:"Filtres",blocks:[
+      {code:"/* Filtres appliques au contenu */\n.blur { filter: blur(4px); }\n.dim { filter: brightness(0.5); }\n.gray { filter: grayscale(100%); }\n.hue { filter: hue-rotate(90deg); }\n.invert { filter: invert(1); }\n.combo { filter: brightness(1.2) contrast(1.1) saturate(1.5); }\n\n/* Filtre sur ce qui est DERRIERE (glassmorphism) */\n.glass {\n  background: rgba(255,255,255,0.7);\n  backdrop-filter: blur(20px) saturate(180%);\n  -webkit-backdrop-filter: blur(20px) saturate(180%);\n}\n\n/* Blend modes */\n.overlay {\n  mix-blend-mode: multiply;\n}"}
+    ]}],
+    quiz:[{q:"<code>backdrop-filter</code> :",opts:["Filtre l'element","Filtre l'arriere-plan","Filtre tout","Filtre les enfants"],correct:"b",
+      expl:"Effet glassmorphism : flou de ce qui est derriere."}]
+  },
+  {id:"w3-math",code:"A7",level:"advanced",title:"CSS Math Functions",sub:"calc, min, max, clamp",tags:["math","advanced"],
+    sections:[{h:"Math en CSS",blocks:[
+      {code:"/* calc : melange unites */\nwidth: calc(100% - 200px);\nwidth: calc(100vw - 2rem);\nfont-size: calc(16px + 0.5vw);\n\n/* min/max : prend le plus petit/grand */\nwidth: min(800px, 100%);     /* max 800 mais s'adapte */\nfont-size: max(1rem, 14px);   /* min 14px sinon 1rem */\n\n/* clamp : fluide entre 2 bornes */\nfont-size: clamp(1rem, 2.5vw, 2rem);\nwidth: clamp(300px, 50%, 900px);\n\n/* Combiner */\npadding: max(16px, calc(2vw));"}
+    ]}],
+    quiz:[{q:"<code>clamp(min, ideal, max)</code> :",opts:["Erreur","Fluide entre min et max","Toujours ideal","Toujours min"],correct:"b",
+      expl:"S'adapte fluidly, borne entre min et max."}]
+  },
+  {id:"w3-specificity",code:"A8",level:"advanced",title:"CSS Specificity & !important",sub:"Resolution des conflits",tags:["specificity","cascade","advanced"],
+    sections:[{h:"Calcul de specificite",blocks:[
+      {table:[
+        ["Selecteur","Poids","Total"],
+        ["<code>p</code>","0,0,0,1","1"],
+        ["<code>.box</code>","0,0,1,0","10"],
+        ["<code>p.box</code>","0,0,1,1","11"],
+        ["<code>div p.box</code>","0,0,1,2","12"],
+        ["<code>#main</code>","0,1,0,0","100"],
+        ["<code>#main .box</code>","0,1,1,0","110"],
+        ["<code>style=\"\"</code>","1,0,0,0","1000"],
+        ["<code>!important</code>","🚨","ecrase tout"]
+      ]},
+      {bad:"<code>!important</code> est l'arme nucleaire. A reserver aux : 1) overrides defensifs pour 3rd party CSS, 2) utility classes (tailwind-style). Jamais en cas par cas."}
+    ]}],
+    quiz:[{q:"<code>!important</code> est :",opts:["Bonne pratique","Ultime recours","Obligatoire","Inutile"],correct:"b",
+      expl:"Casse la cascade naturelle. A utiliser tres rarement."}]
+  },
+  {id:"w3-units",code:"A9",level:"advanced",title:"CSS Units (complet)",sub:"absolutes, relatives, viewport, fr, ch",tags:["units","advanced"],
+    sections:[{h:"Toutes les unites",blocks:[
+      {table:[
+        ["Categorie","Unite","Sens"],
+        ["Absolue","<code>px</code>","Pixel"],
+        ["Absolue","<code>cm/mm/in/pt</code>","Print"],
+        ["Relative font","<code>em</code>","Relatif au parent font-size"],
+        ["Relative font","<code>rem</code>","Relatif a html font-size"],
+        ["Relative font","<code>ex</code>","Hauteur 'x'"],
+        ["Relative font","<code>ch</code>","Largeur '0'"],
+        ["Viewport","<code>vw / vh</code>","% du viewport"],
+        ["Viewport","<code>vmin / vmax</code>","Min/max de vh/vw"],
+        ["Viewport","<code>dvh / svh / lvh</code>","Dynamic/small/large (mobile-safe)"],
+        ["Container","<code>cqw / cqh</code>","% du container"],
+        ["Grid","<code>fr</code>","Fraction de l'espace"],
+        ["Pourcentage","<code>%</code>","Relatif au parent"]
+      ]},
+      {tip:"En 2026, prefere <code>rem</code> pour les tailles, <code>dvh</code> pour les heros mobile, <code>fr</code> pour grid, <code>%</code> pour fluides."}
+    ]}],
+    quiz:[{q:"Pour height full mobile sans bug de barre nav :",opts:["<code>100vh</code>","<code>100dvh</code>","<code>100%</code>","<code>100vmax</code>"],correct:"b",
+      expl:"<code>dvh</code> = dynamic, prend en compte la barre de nav mobile."}]
   }
 ];
 
