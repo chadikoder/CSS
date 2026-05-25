@@ -58,7 +58,7 @@ function highlightPhp(code) {
   // Comments
   s = s.replace(/\/\*[\s\S]*?\*\//g, m => hold("com", m));
   // Strings
-  s = s.replace(/("(?:[^"\]|\.)*"|'(?:[^'\]|\.)*')/g, m => hold("str", m));
+  s = s.replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g, m => hold("str", m));
   // CSS at-rules
   s = s.replace(/(@[a-z-]+)/gi, '<span class="kw">$1</span>');
   // Properties (word followed by colon)
