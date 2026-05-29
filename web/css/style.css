@@ -977,7 +977,6 @@ body.drawer-open{overflow:hidden}
 .pomo-sound.off{opacity:.5}
 @media(max-width:640px){.pomo-panel{right:8px;left:8px;width:auto;top:58px}}
 
-
 /* ===== CSS tracker accent (ported engine, identity preserved) ===== */
 :root{--accent:#38bdf8;--accent-2:#0ea5e9;--accent-r:56;--accent-g:189;--accent-b:248;--grad:linear-gradient(135deg,#38bdf8,#0ea5e9)}
 [data-theme="light"]{--accent:#0284c7;--accent-2:#0369a1;--accent-r:2;--accent-g:132;--accent-b:199}
